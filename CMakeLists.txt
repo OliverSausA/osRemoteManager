@@ -29,8 +29,14 @@ set( BOOST_ROOT ${CMAKE_SOURCE_DIR}/../3rdParty/boost )
 set( BOOST_USE_STATIC_LIBS OFF )
 set( BOOST_USE_MULTITHREADED ON )
 set( BOOST_USE_STATIC_RUNTIME OFF )
-find_package( Boost 1.86 REQUIRED COMPONENTS system program_options )
+find_package( Boost 1.86 REQUIRED COMPONENTS 
+    system 
+    program_options  
+    unit_test_framework
+)
 include_directories( ${Boost_INCLUDE_DIR} )
 #dump_cmake_variables( "boost" )
+
+enable_testing()
 
 add_subdirectory( Server )
