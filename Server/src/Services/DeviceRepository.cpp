@@ -1,18 +1,20 @@
-  #include "DeviceRepository.h"
+#include "DeviceRepository.h"
 
-  void DeviceRepository::Load()
-  {
+#include <boost/json.hpp>
 
-  }
-  void DeviceRepository::Save()
-  {
+void DeviceRepository::Load(std::string_view path)
+{
 
-  }
-  void DeviceRepository::Add( const SDevice& device )
-  {
+}
+void DeviceRepository::Save()
+{
 
-  }
-  void DeviceRepository::Delete( const SDevice& device )
-  {
+}
+void DeviceRepository::Add( const SDevice& device )
+{
 
-  }
+}
+void DeviceRepository::Delete( const SDevice& device )
+{
+
+}

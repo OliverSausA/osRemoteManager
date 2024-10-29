@@ -32,6 +32,7 @@ set( BOOST_USE_STATIC_RUNTIME OFF )
 find_package( Boost 1.86 REQUIRED COMPONENTS 
     system 
     program_options  
+    json
     unit_test_framework
 )
 include_directories( ${Boost_INCLUDE_DIR} )
