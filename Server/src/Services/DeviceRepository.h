@@ -1,14 +1,15 @@
 #pragma once
 
-#include "Models/Device.h"
+#include <string_view>
+#include "../Models/Device.h"
 
 class DeviceRepository
 {
 public:
   
-  void Load();
+  void Load(std::string_view path);
   void Save();
   void Add( const SDevice& device );
   void Delete( const SDevice& device );
 
-}
+};

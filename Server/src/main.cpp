@@ -4,6 +4,9 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 
+#include "Services/DeviceRepository.h"
+#include "Models/Device.h"
+
 using namespace boost::program_options;
 
 //-------------------------------------------------------------------------------------------------
@@ -21,14 +24,18 @@ int main( int argc, char* argv[] )
     notify(vm);
 
     if (vm.count("help"))
+    {
       std::cout << desc << '\n';
-    
+      return 0;
+    }
+
+    DeviceRepository dr;
+    dr.Load("TEST");
   }
   catch(const std::exception& e)
   {
     std::cerr << e.what() << '\n';
   }
-  
 
   return 0;
 }
