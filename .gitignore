@@ -33,3 +33,7 @@
 
 # Temporary files
 .$*.bkp
+*.swp
+
+# Temporary directories
+build/*
