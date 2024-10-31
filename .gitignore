@@ -35,5 +35,5 @@
 .$*.bkp
 *.swp
 
-# remp directories
+# Temporary directories
 build/*
