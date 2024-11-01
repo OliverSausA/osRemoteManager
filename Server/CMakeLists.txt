@@ -2,8 +2,10 @@
 
 add_executable( osrmd
   src/main.cpp
+  src/Models/AppConfig.cpp
   src/Models/Device.cpp
   src/Services/DeviceRepository.cpp
+  src/Services/DeviceManager.cpp
   )
 
 add_executable( osrmd_tests

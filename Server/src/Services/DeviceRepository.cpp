@@ -6,7 +6,7 @@ void DeviceRepository::Load(std::string_view path)
 {
 
 }
-void DeviceRepository::Save()
+void DeviceRepository::Save(std::string_view path)
 {
 
 }
