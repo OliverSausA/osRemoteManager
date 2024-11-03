@@ -11,9 +11,11 @@ public:
   void Initialize();
   void Cycle();
   void Terminate();
+  bool IsAlive();
 
 private:
   DeviceRepositoryPtr deviceRepositoryPtr;
+  int currentDeviceIdx;
 };
 
 #endif // _DEVICE_MANAGER_H

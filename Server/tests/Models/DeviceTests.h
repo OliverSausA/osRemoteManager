@@ -35,4 +35,44 @@ BOOST_AUTO_TEST_CASE( StreamDeviceToJSON )
   BOOST_TEST( test == "{\"Name\":\"DeviceName\",\"MAC\":\"AA:BB:CC:DD:EE:FF\",\"IP\":\"192.168.1.1\",\"State\":1}" );
 }
 
+BOOST_AUTO_TEST_CASE( CreateDeviceListFromJSON )
+{
+  std::string json_test = "[{\"Name\":\"DeviceName\",\"MAC\":\"AA:BB:CC:DD:EE:FF\",\"IP\":\"192.168.1.1\",\"State\":1},";
+  json_test += "{\"Name\":\"DeviceName 2\",\"MAC\":\"AF:BE:CD:DC:EB:FA\",\"IP\":\"192.168.1.2\",\"State\":0}]";
+  boost::json::value jv = boost::json::parse( json_test );
+  std::vector<SDevice> devices = boost::json::value_to<std::vector<SDevice>>(jv);
+  BOOST_TEST( devices[0].Name  == "DeviceName" );
+  BOOST_TEST( devices[0].MAC   == "AA:BB:CC:DD:EE:FF" );
+  BOOST_TEST( devices[0].IP    == "192.168.1.1" );
+  BOOST_TEST( devices[0].State == EDeviceState::eRunning );
+  BOOST_TEST( devices[1].Name  == "DeviceName 2" );
+  BOOST_TEST( devices[1].MAC   == "AF:BE:CD:DC:EB:FA" );
+  BOOST_TEST( devices[1].IP    == "192.168.1.2" );
+  BOOST_TEST( devices[1].State == EDeviceState::eUnknown );
+}
+
+BOOST_AUTO_TEST_CASE( StreamDeviceListToJSON )
+{
+  std::vector<SDevice> devices = {
+    {
+      "DeviceName", 
+      "AA:BB:CC:DD:EE:FF", 
+      "192.168.1.1", 
+      EDeviceState::eRunning
+    },
+    {
+      "DeviceName 2", 
+      "AF:BE:CD:DC:EB:FA", 
+      "192.168.1.2", 
+      EDeviceState::eUnknown
+    }
+  };
+  boost::json::value jv = boost::json::value_from(devices);
+  std::string test = boost::json::serialize(jv);
+
+  std::string json_test = "[{\"Name\":\"DeviceName\",\"MAC\":\"AA:BB:CC:DD:EE:FF\",\"IP\":\"192.168.1.1\",\"State\":1},";
+  json_test += "{\"Name\":\"DeviceName 2\",\"MAC\":\"AF:BE:CD:DC:EB:FA\",\"IP\":\"192.168.1.2\",\"State\":0}]";
+  BOOST_TEST( test == json_test );
+}
+
 BOOST_AUTO_TEST_SUITE_END()

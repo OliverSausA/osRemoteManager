@@ -21,3 +21,19 @@ SDevice tag_invoke( const boost::json::value_to_tag<SDevice>, const boost::json:
   device.State = (EDeviceState) boost::json::value_to<int>(obj.at("State"));
   return device;
 }
+
+void tag_invoke( const boost::json::value_from_tag&, boost::json::value& jv, std::vector<SDevice> const& v )
+{
+  boost::json::array json_array;
+  for ( const auto& device : v )
+    json_array.push_back(boost::json::value_from(device));
+  jv = json_array;
+}
+
+std::vector<SDevice> tag_invoke( const boost::json::value_to_tag<std::vector<SDevice>>, const boost::json::value& jv)
+{
+  std::vector<SDevice> devices;
+  for (const auto& device : jv.as_array())
+    devices.push_back(boost::json::value_to<SDevice>(device));
+  return devices; 
+}
