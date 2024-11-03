@@ -14,11 +14,12 @@ void DeviceRepository::Load(const std::string& path)
 
   std::ifstream file(path);
   if (!file) {
-    // throw std::runtime_error("could not read " + path);
-    std::cout << "could not read " << path << std::endl;
+    throw std::runtime_error("could not read " + path);
   }
   std::ostringstream file_content;
   file_content << file.rdbuf();
+  std::cout << "DeviceRepository::Load" << std::endl;
+  std::cout << file_content.str() << std::endl;
 
   boost::json::value jv = boost::json::parse( file_content.str() );
   devices = boost::json::value_to<std::vector<SDevice>>(jv);
