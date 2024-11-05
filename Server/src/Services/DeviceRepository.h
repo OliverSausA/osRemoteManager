@@ -1,8 +1,11 @@
 #pragma once
 
 #include <string>
+#include <boost/json.hpp>
 #include "DeviceRepositoryInterface.h"
 #include "../Models/Device.h"
+
+namespace json = boost::json;
 
 class DeviceRepository : public IDeviceRepository
 {
@@ -18,4 +21,6 @@ public:
 
 private:
   std::vector<SDevice> devices;
+
+  void PrettyPrint( std::ostream& os, json::value const& jv, std::string* indent = nullptr );
 };
